@@ -1,0 +1,21 @@
+export default { 
+    "name":"",
+    "gender":"",
+    "class":"",
+    "subclass":"",
+    "race":"",
+    "subrace":"",
+    "alignment":"",
+    "background":"",
+    "experiencePoints":"",
+    "level":"",
+    "playerName":"",
+    "strenth":"",
+    "dexterity":"",
+    "constitution":"",
+    "intelligence":"",
+    "wisdom":"",
+    "charisma":"",
+    "inspiration":false,
+    "profeciencies":[]
+}

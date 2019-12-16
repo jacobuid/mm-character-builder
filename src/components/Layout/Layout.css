@@ -1,0 +1,17 @@
+.dark .dnd-box{ background-color: #1a1a22; }
+.light .dnd-box{ background-color: #f2f2f2; }
+
+.dnd-box{ border-radius: 10px; padding:31px 15px 15px; margin:15px 0; position:relative; }
+.dnd-box-tag{ position: absolute; top: 15px; }
+
+
+@media only screen and (min-width : 768px){
+    .dnd-container-4{ flex: 4; }
+    .dnd-container-2{ flex: 2; }
+    .dnd-container-1{ flex: 1; }
+    .dnd-container-gutter{
+        width:20px;
+    }
+}
+
+
