@@ -3,31 +3,31 @@ import detectStorage from '../_utils/detect-storage'
 import exportCharacter from '../_utils/export-character'
 //import encodeImage from '../_utils/encode-image'
 import characterData from '../_utils/character-data'
-import Column from './Column/Column'
-import { Container, Spacer, Box } from './Layout/Layout'
-import TextInput from './TextInput/TextInput'
+import { Container, Spacer, Box, Row, VerticalRule } from './Layout/Layout'
+import TextInput from './Inputs/TextInput'
+import NumberInput from './Inputs/NumberInput'
 
 
 class App extends Component {
 
     state = {
-        theme:'light',
-        notSupported:'',
-        character:{}
+        theme: 'dark',
+        notSupported: '',
+        character: {}
     }
 
-    componentDidMount(){
+    componentDidMount() {
         // Load character from localStorage if he exists
         if (detectStorage('localStorage')) {
             try {
                 let storedCharacter = JSON.parse(localStorage.getItem('dnd-character'));
-                this.setState({character: storedCharacter})
-              } catch(e) {
+                this.setState({ character: storedCharacter })
+            } catch (e) {
                 // Character does not exist, Create New one.
-                this.setState({character: characterData})
-              }
+                this.setState({ character: characterData })
+            }
         } else {
-            this.setState({notSupported: <div>Sorry. App is not supported in this browser.</div>})
+            this.setState({ notSupported: <div>Sorry. App is not supported in this browser.</div> })
         }
 
         // set theme
@@ -49,67 +49,111 @@ class App extends Component {
     }
 
     handleExport = (e) => {
-        exportCharacter( JSON.stringify(this.state.character), `character-sheet-${this.state.character.name}.json` );
+        exportCharacter(JSON.stringify(this.state.character), `character-sheet-${this.state.character.name}.json`);
     }
 
     handleChange = (e) => {
-        let character = {...this.state.character}
+        let character = { ...this.state.character }
         character[e.target.id] = e.target.value;
-        this.setState({character})
+        this.setState({ character })
     }
 
 
     render() {
 
+        document.title = (this.state.character.name) ? this.state.character.name + ' | D&D Character Sheet' : 'D&D Character Sheet';
+
+        let character = this.state.character;
+        let characterRace = (character.subrace) ? character.subrace : character.race;
+        let characterClass = (character.subclass) ? character.subclass : character.class;
+
         return (
             <div id="dnd-app">
-                { this.state.notSupported }
+                {this.state.notSupported}
                 <header>
-                    <img id="dnd-logo" src="/images/dnd-logo.png" alt="D&amp;D Logo"/>
+                    <img id="dnd-logo" src="/images/dnd-logo.png" alt="D&amp;D Logo" />
                     <h1 id="dnd-title">Character Sheet</h1>
                 </header>
                 <main id="dnd-content">
-                    <Container size="4">
-                        <Box>
-                            <TextInput 
-                                value={this.state.character.name || ''} 
-                                id="name" 
-                                onChange={this.handleChange} 
-                                placeholder="Character Name"
+                    <Box>
+                        <TextInput
+                            value={character.name || ''}
+                            id="name"
+                            onChange={this.handleChange}
+                            placeholder="Character Name"
+                        />
+                        <Row>
+                            <TextInput
+                                value={characterRace || ''}
+                                id="race"
+                                size="dnd-small"
+                                onChange={this.handleChange}
+                                placeholder="Race"
+                            />
+                            <VerticalRule />
+                            <TextInput
+                                value={characterClass || ''}
+                                id="class"
+                                size="dnd-small"
+                                onChange={this.handleChange}
+                                placeholder="Class"
+                            />
+                            <VerticalRule />
+                            <TextInput
+                                value={character.level || ''}
+                                id="level"
+                                size="dnd-small"
+                                onChange={this.handleChange}
+                                placeholder="Level"
+                            />
+                            <Container size="3"></Container>
+                        </Row>
+                    </Box>
+
+                    <section id="dnd-ability-scores">
+                        <Box tag="Strength">
+                            <NumberInput
+                                value={character.strength || ''}
+                                id="strength"
+                                onChange={this.handleChange}
                             />
                         </Box>
-                        
-                    </Container>
-                    <Spacer />
-                    <Container size="1">
-                        <Box tag="Class">
-                                <TextInput 
-                                    value={this.state.character.class || ''} 
-                                    id="class" 
-                                    onChange={this.handleChange} 
-                                />
-                        </Box>
-                    </Container>
-                    <Spacer />
-                    <Container size="1">
-                        <Box tag="Race">
-                            <TextInput 
-                                value={this.state.character.race || ''} 
-                                id="race" 
-                                onChange={this.handleChange} 
+                        <Box tag="Dexterity">
+                            <NumberInput
+                                value={character.dexterity || ''}
+                                id="dexterity"
+                                onChange={this.handleChange}
                             />
                         </Box>
-                    </Container>
-                    <Spacer />
-                    <Container size="1">
-                        <Box tag="Background">
-                            <TextInput 
-                                value={this.state.character.background || ''} 
-                                id="background" 
-                                onChange={this.handleChange} 
+                        <Box tag="Constitution">
+                            <NumberInput
+                                value={character.constitution || ''}
+                                id="constitution"
+                                onChange={this.handleChange}
                             />
                         </Box>
-                    </Container>
+                        <Box tag="Intelligence">
+                            <NumberInput
+                                value={character.intelligence || ''}
+                                id="intelligence"
+                                onChange={this.handleChange}
+                            />
+                        </Box>
+                        <Box tag="Wisdom">
+                            <NumberInput
+                                value={character.wisdom || ''}
+                                id="wisdom"
+                                onChange={this.handleChange}
+                            />
+                        </Box>
+                        <Box tag="Charisma">
+                            <NumberInput
+                                value={character.charisma || ''}
+                                id="charisma"
+                                onChange={this.handleChange}
+                            />
+                        </Box>
+                    </section>
                 </main>
                 <footer>
                     <p>&copy; 2019 Jacob King</p>

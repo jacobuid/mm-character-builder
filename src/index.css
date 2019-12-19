@@ -50,37 +50,58 @@ table {
 #root{
     padding:0 20px;
 }
-#dnd-app{
-    max-width: 1280px;
-    margin:0 auto;
-}
 
-#dnd-logo{
-    margin:15px 0;
-    width: 100px;
-    float:left;
-}
-#dnd-title{
-    margin: 0px 130px;
-    padding: 30px 0;
-    font-size: 20px;
-}
-
-@media only screen and (min-width : 768px){
-    #dnd-content{
-        display: flex;
-        clear: both;
-    }
-    #dnd-logo{
-        width: 100px;
-    }
-}
 
 /* Overall styles */
 html, body { height: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; }
-.light{ background-color:#dddddf; color:#333 }
-.dark{ background-color:#333339; color:#bbb }
 
-.light .dnd-text-input{ border-bottom: 1px solid #333; }
-.light .dnd-text-input:focus{ border-bottom: 1px solid #d00; }
-.light .dnd-text-label{ color:#bbb }
+
+
+
+.dnd-box{ border-radius: 10px; padding:15px; margin:15px 0; position:relative; }
+.dnd-vertical-rule { display:none; }
+
+
+.dnd-text-input{ font-size: 20px; border:none; background:none; outline: none; line-height: 30px; height:30px; width:100% }
+.dnd-text-input:focus{ box-shadow: 0px 1px 0px #d00; }
+
+.dnd-small.dnd-text-input{ font-size: 12px; line-height: 22px; height:22px; width:initial }
+
+
+.dnd-text-label{ font-size: 12px; position: absolute; }
+
+
+/* DOM Specific */
+
+#dnd-app{ max-width: 1280px; margin:0 auto; }
+
+#dnd-logo{ margin:15px 0; width: 100px; float:left; }
+#dnd-title{ margin: 0px 130px; padding: 30px 0; font-size: 20px; }
+#dnd-ability-scores{ width: 120px }
+
+/* Theme Styles */
+.dark{ background-color:#333339; color:#bbb }
+.dark .dnd-text-input{ color: #dddddf }
+.dark .dnd-box{ background-color: #1a1a22; }
+
+.light{ background-color:#dddddf; color:#333 }
+.light .dnd-text-input{ color: #333333 }
+.light .dnd-box{ background-color: #f2f2f2; }
+
+/* Desktop Only */
+@media only screen and (min-width : 768px){
+    .dnd-row{ display: flex; }
+    .dnd-container-4{ flex: 4; }
+    .dnd-container-3{ flex: 3; }
+    .dnd-container-2{ flex: 2; }
+    .dnd-container-1{ flex: 1; }
+    .dnd-container-gutter{ width:20px; }
+    .dnd-vertical-rule { display:block; width: 1px; background-color: #d00; }
+    
+    
+    #dnd-content{ clear: both; }
+    #dnd-logo{ width: 100px; }
+
+    #class,#level { margin-left:10px; }
+    #race,#class { margin-right:10px; }
+}

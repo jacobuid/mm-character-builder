@@ -1,5 +1,16 @@
 import React, { Component } from 'react';
-import './Layout.css'
+
+class Row extends Component {
+    render() {
+        let { ...props } = this.props;
+        return (
+            <div className={`dnd-row`} {...props}>
+                {this.props.children}
+            </div>
+        );
+        
+    }
+}
 
 class Container extends Component {
     render() {
@@ -20,6 +31,14 @@ class Spacer extends Component {
     }
 }
 
+class VerticalRule extends Component {
+    render() {
+        return (
+            <div className="dnd-vertical-rule"></div>
+        );
+    }
+}
+
 
 class Box extends Component {
     render() {
@@ -32,4 +51,4 @@ class Box extends Component {
     }
 }
 
-export { Container, Spacer, Box };
+export { Row, Container, Spacer, Box, VerticalRule };
