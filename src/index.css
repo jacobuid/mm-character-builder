@@ -3,105 +3,337 @@
    License: none (public domain)
 */
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline;
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
 }
 body {
-	line-height: 1;
+    line-height: 1;
 }
-ol, ul {
-	list-style: none;
+ol,
+ul {
+    list-style: none;
 }
-blockquote, q {
-	quotes: none;
+blockquote,
+q {
+    quotes: none;
 }
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
 }
 table {
-	border-collapse: collapse;
-	border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
-#root{
-    padding:0 20px;
+#root {
+    padding: 0 20px;
 }
-
 
 /* Overall styles */
-html, body { height: 100%; font-family: Verdana, Geneva, Tahoma, sans-serif; }
+html,
+body {
+    height: 100%;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
 
+.outline {
+    color: white;
+    text-shadow: -2px -2px 0 #000, -2px -1px 0 #000, -2px 0px 0 #000,
+        -2px 1px 0 #000, -2px 2px 0 #000, -1px -2px 0 #000, -1px -1px 0 #000,
+        -1px 0px 0 #000, -1px 1px 0 #000, -1px 2px 0 #000, 0px -2px 0 #000,
+        0px -1px 0 #000, 0px 0px 0 #000, 0px 1px 0 #000, 0px 2px 0 #000,
+        1px -2px 0 #000, 1px -1px 0 #000, 1px 0px 0 #000, 1px 1px 0 #000,
+        1px 2px 0 #000, 2px -2px 0 #000, 2px -1px 0 #000, 2px 0px 0 #000,
+        2px 1px 0 #000, 2px 2px 0 #000;
+}
 
+.dnd-vertical-rule {
+    display: none;
+}
 
+.dnd-text-input {
+    outline: none;
+}
+.dnd-text-input:focus {
+    box-shadow: 0px 1px 0px #d00;
+}
 
-.dnd-box{ border-radius: 10px; padding:15px; margin:15px 0; position:relative; }
-.dnd-vertical-rule { display:none; }
+.dnd-small.dnd-text-input {
+    font-size: 12px;
+    line-height: 22px;
+    height: 22px;
+    width: initial;
+}
 
-
-.dnd-text-input{ font-size: 20px; border:none; background:none; outline: none; line-height: 30px; height:30px; width:100% }
-.dnd-text-input:focus{ box-shadow: 0px 1px 0px #d00; }
-
-.dnd-small.dnd-text-input{ font-size: 12px; line-height: 22px; height:22px; width:initial }
-
-
-.dnd-text-label{ font-size: 12px; position: absolute; }
-
+.dnd-text-label {
+    font-size: 12px;
+    position: absolute;
+}
 
 /* DOM Specific */
 
-#dnd-app{ max-width: 1280px; margin:0 auto; }
+#dnd-app {
+    max-width: 1280px;
+    margin: 0 auto;
+}
 
-#dnd-logo{ margin:15px 0; width: 100px; float:left; }
-#dnd-title{ margin: 0px 130px; padding: 30px 0; font-size: 20px; }
-#dnd-ability-scores{ width: 120px }
+#dnd-logo {
+    margin: 15px 0;
+    width: 100px;
+    float: left;
+}
+#dnd-title {
+    margin: 0px 130px;
+    padding: 30px 0;
+    font-size: 20px;
+}
+#dnd-ability-scores {
+    width: 120px;
+}
+
+.ability {
+    margin: 20px 10px;
+    min-width: 280px;
+}
+
+.ability-banner {
+    height: 46px;
+    position: relative;
+    display: flex;
+    box-sizing: border-box;
+    font-weight: bold;
+}
+
+.ability-icon {
+    box-sizing: border-box;
+    padding: 4px;
+    width: 56px;
+    position: absolute;
+    top: -5px;
+    left: 3px;
+    border: 2px solid #333;
+    border-radius: 50%;
+    background-color: #fff;
+}
+
+.ability-tag {
+    margin: 0 0 0 66px;
+    line-height: 46px;
+    flex: 1;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.ability-stat {
+    margin: 0 64px 0 0;
+    line-height: 46px;
+    text-align: center;
+    font-size: 26px;
+    flex: 0 0 40px;
+}
+
+.ability-mod {
+    margin: 0;
+    position: absolute;
+    top: -7px;
+    right: 0px;
+    width: 60px;
+    height: 60px;
+    line-height: 60px;
+    text-align: center;
+    background-image: url("/images/dice/d20-outline.png");
+    background-size: cover;
+    font-size: 16px;
+}
+
+.command {
+    margin: 10px;
+    font-size: 12px;
+}
+
+.command-task {
+    font-size: 18px;
+    border-width: 1px;
+    border-style: solid;
+}
+
+.command-task .dice {
+    height: 30px;
+    margin: 0 5px;
+    vertical-align: middle;
+}
 
 /* Theme Styles */
-.dark{ background-color:#333339; color:#bbb }
-.dark .dnd-text-input{ color: #dddddf }
-.dark .dnd-box{ background-color: #1a1a22; }
+.dark {
+    background-color: rgb(50, 50, 60);
+    color: #bbb;
+}
+.dark .dnd-text-input {
+    color: #dddddf;
+}
+.dark .dnd-box {
+    background-color: rgba(0, 0, 10, 0.5);
+}
+.dark .dnd-border {
+    border-color: rgba(0, 0, 10, 1);
+}
 
-.light{ background-color:#dddddf; color:#333 }
-.light .dnd-text-input{ color: #333333 }
-.light .dnd-box{ background-color: #f2f2f2; }
+.light {
+    background-color: rgb(220, 220, 230);
+    color: #333;
+}
+.light .dnd-text-input {
+    color: #333333;
+}
+.light .dnd-box {
+    background-color: rgba(245, 245, 255, 0.8);
+}
+.light .dnd-border {
+    border-color: rgba(185, 185, 185, 1);
+}
 
 /* Desktop Only */
-@media only screen and (min-width : 768px){
-    .dnd-row{ display: flex; }
-    .dnd-container-4{ flex: 4; }
-    .dnd-container-3{ flex: 3; }
-    .dnd-container-2{ flex: 2; }
-    .dnd-container-1{ flex: 1; }
-    .dnd-container-gutter{ width:20px; }
-    .dnd-vertical-rule { display:block; width: 1px; background-color: #d00; }
-    
-    
-    #dnd-content{ clear: both; }
-    #dnd-logo{ width: 100px; }
+@media only screen and (min-width: 768px) {
+    .dnd-row {
+        display: flex;
+    }
+    .dnd-container-4 {
+        flex: 4;
+    }
+    .dnd-container-3 {
+        flex: 3;
+    }
+    .dnd-container-2 {
+        flex: 2;
+    }
+    .dnd-container-1 {
+        flex: 1;
+    }
+    .dnd-container-gutter {
+        width: 20px;
+    }
+    .dnd-vertical-rule {
+        display: block;
+        width: 1px;
+        background-color: #d00;
+    }
 
-    #class,#level { margin-left:10px; }
-    #race,#class { margin-right:10px; }
+    #dnd-content {
+        clear: both;
+    }
+    #dnd-logo {
+        width: 100px;
+    }
+
+    #class,
+    #level {
+        margin-left: 10px;
+    }
+    #race,
+    #class {
+        margin-right: 10px;
+    }
 }
