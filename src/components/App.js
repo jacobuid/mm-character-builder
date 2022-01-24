@@ -1,174 +1,162 @@
-import React, { Component } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import detectStorage from "../_utils/detect-storage";
 import exportCharacter from "../_utils/export-character";
-//import encodeImage from '../_utils/encode-image'
-import characterData from "../_utils/character-data";
+import { characterData } from "../_utils/app-data";
 import { Container, Box, Row, VerticalRule } from "./Layout/Layout";
 import TextInput from "./Inputs/TextInput";
+import NumberInput from "./Inputs/NumberInput";
+import SkillList from "./Lists/skill-list";
 
-class App extends Component {
-    state = {
-        theme: "light",
-        notSupported: "",
-        character: {},
-    };
+function App(props) {
+    const [notSupported, setNotSupported] = useState("");
+    const [character, setCharacter] = useState(characterData);
+    const [skill, setSkill] = React.useState("");
 
-    componentDidMount() {
+    useEffect(() => {
         // Load character from localStorage if he exists
         if (detectStorage("localStorage")) {
             if (localStorage.getItem("wp-character")) {
                 let storedCharacter = JSON.parse(
                     localStorage.getItem("wp-character")
                 );
-                this.setState({ character: storedCharacter });
+                setCharacter(storedCharacter);
             } else {
                 // Character does not exist, Create New one.
-                this.setState({ character: characterData });
+                setCharacter(characterData);
             }
         } else {
-            this.setState({
-                notSupported: (
-                    <div>Sorry. App is not supported in this browser.</div>
-                ),
-            });
+            setNotSupported(
+                <div>Sorry. App is not supported in this browser.</div>
+            );
         }
 
         // set theme
-        document.body.classList.add(this.state.theme);
+        document.body.classList.add("light");
+    }, []);
 
-        // add event for saving
-        window.addEventListener("beforeunload", this.onUnload);
-    }
-
-    componentWillUnmount() {
-        window.removeEventListener("beforeunload", this.onUnload);
-    }
-
-    onUnload = (e) => {
+    const handleBlur = () => {
         if (detectStorage("localStorage")) {
-            localStorage.setItem(
-                "wp-character",
-                JSON.stringify(this.state.character)
-            );
-            // TODO: localStorage.setItem('settings', this.state.theme);
+            localStorage.setItem("wp-character", JSON.stringify(character));
         }
     };
 
-    handleExport = (e) => {
+    const handleExport = (e) => {
         exportCharacter(
-            JSON.stringify(this.state.character),
-            `character-sheet-${this.state.character.name}.json`
+            JSON.stringify(character),
+            `character-sheet-${character.name}.json`
         );
     };
 
-    handleChange = (e) => {
-        let character = { ...this.state.character };
-        character[e.target.id] = e.target.value;
-        this.setState({ character });
+    const handleChange = (e) => {
+        let currentCharacter = { ...character };
+        currentCharacter[e.target.id] = e.target.value;
+        setCharacter(currentCharacter);
     };
 
-    handleCheckboxChange = (e) => {
-        let character = { ...this.state.character };
-        const value = e.target.checked;
-        const name = e.target.name;
-        character[name] = value;
-        this.setState({ character });
+    const addItem = (value, type) => {
+        let currentCharacter = { ...character };
+        currentCharacter[type].push({ name: value, proficency: "todo" });
+        setCharacter(currentCharacter);
     };
 
-    addItem = (item) => {
-        // var timestamp = new Date().getTime();
+    const removeItem = (id, type) => {
+        let currentCharacter = { ...character };
+        currentCharacter[type] = currentCharacter[type].filter(
+            (value) => value.name !== id
+        );
+        setCharacter(currentCharacter);
     };
 
-    render() {
-        document.title = this.state.character.name
-            ? this.state.character.name + " | D&D Character Sheet"
-            : "D&D Character Sheet";
+    document.title = character.name
+        ? character.name + " | D&D Character Sheet"
+        : "D&D Character Sheet";
 
-        let character = this.state.character;
-        let characterHeritage = character.heritage;
-        let characterLineage = character.lineage;
-        let characterArchetypes = character.archetypes;
+    let year = new Date().getFullYear();
 
-        let newSkill = "a";
-
-        let year = new Date().getFullYear();
-
-        return (
-            <div id="wp-app">
-                {this.state.notSupported}
-                <header>
-                    <img
-                        id="wp-logo"
-                        src="/images/wp-logo.png"
-                        alt="D&amp;D Logo"
+    return (
+        <div id="wp-app">
+            {notSupported}
+            <header>
+                <img
+                    id="wp-logo"
+                    src="/images/wp-logo.png"
+                    alt="D&amp;D Logo"
+                />
+                <div id="wp-options">
+                    <h1 id="wp-title">Character Builder</h1>
+                    <button
+                        id="wp-export"
+                        className="wp-button"
+                        onClick={handleExport}
+                    >
+                        Export Character Data
+                    </button>
+                </div>
+            </header>
+            <main id="wp-content">
+                <Box>
+                    <TextInput
+                        value={character.name}
+                        id="name"
+                        onChange={handleChange}
+                        onBlur={handleBlur}
+                        placeholder="Character Name"
                     />
-                    <div id="wp-options">
-                        <h1 id="wp-title">Character Builder</h1>
-                        <button
-                            id="wp-export"
-                            className="wp-button"
-                            onClick={this.handleExport}
-                        >
-                            Export Character Data
-                        </button>
-                    </div>
-                </header>
-                <main id="wp-content">
-                    <Box>
+                    <Row>
                         <TextInput
-                            value={character.name || ""}
-                            id="name"
-                            onChange={this.handleChange}
-                            placeholder="Character Name"
+                            value={character.heritage}
+                            id="heritage"
+                            size="wp-small"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Heritage"
                         />
-                        <Row>
-                            <TextInput
-                                value={characterHeritage || ""}
-                                id="heritage"
-                                size="wp-small"
-                                onChange={this.handleChange}
-                                placeholder="Heritage"
-                            />
-                            <VerticalRule />
-                            <TextInput
-                                value={characterLineage || ""}
-                                id="lineage"
-                                size="wp-small"
-                                onChange={this.handleChange}
-                                placeholder="Lineage"
-                            />
-                            <VerticalRule />
-                            <TextInput
-                                value={characterArchetypes || ""}
-                                id="archetypes"
-                                size="wp-small"
-                                onChange={this.handleChange}
-                                placeholder="archetypes"
-                            />
-                            <VerticalRule />
-                            <TextInput
-                                value={character.level || ""}
-                                id="level"
-                                size="wp-small"
-                                onChange={this.handleChange}
-                                placeholder="Level"
-                            />
-                            <Container size="3"></Container>
-                        </Row>
-                    </Box>
+                        <VerticalRule />
+                        <TextInput
+                            value={character.lineage}
+                            id="lineage"
+                            size="wp-small"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Lineage"
+                        />
+                        <VerticalRule />
+                        <TextInput
+                            value={character.archetypes}
+                            id="archetypes"
+                            size="wp-small"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Archetypes"
+                        />
+                        <VerticalRule />
+                        <NumberInput
+                            value={character.level}
+                            min="0"
+                            id="level"
+                            size="wp-small"
+                            onChange={handleChange}
+                            onBlur={handleBlur}
+                            placeholder="Level"
+                        />
+                        <Container size="3"></Container>
+                    </Row>
+                </Box>
 
-                    <section id="wp-skills">
-                        {/* {character.skills.map((data) => (
-                            <p>{data.name}</p>
-                        ))} */}
-                    </section>
-                </main>
-                <footer>
-                    <p>&copy; {year} Wayward Path</p>
-                </footer>
-            </div>
-        );
-    }
+                <section id="wp-skills">
+                    <p>Skills:</p>
+                    <SkillList
+                        skills={character.skills}
+                        addCallback={addItem}
+                        removeCallback={removeItem}
+                    />
+                </section>
+            </main>
+            <footer>
+                <p>&copy; {year} Wayward Path</p>
+            </footer>
+        </div>
+    );
 }
 
 export default App;

@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class TextInput extends Component {
     render() {
-        let { label, size, onChange, ...other } = this.props;
+        let { label, size, onChange, onBlur, ...other } = this.props;
 
         const handleChange = (e) => {
             e.target.id = this.props.id;
@@ -20,8 +20,10 @@ class TextInput extends Component {
         return (
             <React.Fragment>
                 <input
+                    type="text"
                     value={this.props.value}
                     onChange={handleChange}
+                    onBlur={onBlur}
                     onKeyDown={handleKeyDown}
                     onFocus={handleFocus}
                     className={`wp-text-input${size ? " " + size : ""}`}
