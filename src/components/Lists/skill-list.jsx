@@ -26,7 +26,7 @@ const SkillList = (props) => {
                 {props.skills.map((item, i) => (
                     <li key={i}>
                         <label>{item.name}</label>
-                        <button type="button" onClick={() => handleRemove(item.name)}>
+                        <button type="button" onClick={() => handleRemove(item.id)}>
                             Remove
                         </button>
                     </li>

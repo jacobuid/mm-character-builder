@@ -7,12 +7,12 @@ const characterData = {
     heritage: "",
     speed: "",
     skills: [
-        { name: "punch", proficency: "4" },
-        { name: "kick", proficency: "2" },
+        { id: 1234, name: "punch", proficency: "4", specific: true },
+        { id: 1244, name: "kick", proficency: "2", specific: false },
     ],
     traits: [
-        { name: "strength", active: true },
-        { name: "constitution", active: false },
+        { id: 6234, name: "strength", active: true },
+        { id: 3234, name: "constitution", active: false },
     ],
     movement: "",
     stamina: "",

@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import detectStorage from "../_utils/detect-storage";
 import exportCharacter from "../_utils/export-character";
 import { characterData } from "../_utils/app-data";
@@ -10,7 +10,6 @@ import SkillList from "./Lists/skill-list";
 function App(props) {
     const [notSupported, setNotSupported] = useState("");
     const [character, setCharacter] = useState(characterData);
-    const [skill, setSkill] = React.useState("");
 
     useEffect(() => {
         // Load character from localStorage if he exists
@@ -34,11 +33,12 @@ function App(props) {
         document.body.classList.add("light");
     }, []);
 
-    const handleBlur = () => {
+    useEffect(() => {
+        //do operation on character state change
         if (detectStorage("localStorage")) {
             localStorage.setItem("wp-character", JSON.stringify(character));
         }
-    };
+    }, [character]);
 
     const handleExport = (e) => {
         exportCharacter(
@@ -55,14 +55,18 @@ function App(props) {
 
     const addItem = (value, type) => {
         let currentCharacter = { ...character };
-        currentCharacter[type].push({ name: value, proficency: "todo" });
+        currentCharacter[type].push({
+            id: "id" + new Date().getTime(),
+            name: value,
+            proficency: "todo",
+        });
         setCharacter(currentCharacter);
     };
 
     const removeItem = (id, type) => {
         let currentCharacter = { ...character };
         currentCharacter[type] = currentCharacter[type].filter(
-            (value) => value.name !== id
+            (value) => value.id !== id
         );
         setCharacter(currentCharacter);
     };
@@ -99,7 +103,6 @@ function App(props) {
                         value={character.name}
                         id="name"
                         onChange={handleChange}
-                        onBlur={handleBlur}
                         placeholder="Character Name"
                     />
                     <Row>
@@ -108,7 +111,6 @@ function App(props) {
                             id="heritage"
                             size="wp-small"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="Heritage"
                         />
                         <VerticalRule />
@@ -117,7 +119,6 @@ function App(props) {
                             id="lineage"
                             size="wp-small"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="Lineage"
                         />
                         <VerticalRule />
@@ -126,7 +127,6 @@ function App(props) {
                             id="archetypes"
                             size="wp-small"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="Archetypes"
                         />
                         <VerticalRule />
@@ -136,7 +136,6 @@ function App(props) {
                             id="level"
                             size="wp-small"
                             onChange={handleChange}
-                            onBlur={handleBlur}
                             placeholder="Level"
                         />
                         <Container size="3"></Container>
