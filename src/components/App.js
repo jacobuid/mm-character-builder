@@ -72,8 +72,8 @@ function App(props) {
     };
 
     document.title = character.name
-        ? character.name + " | D&D Character Sheet"
-        : "D&D Character Sheet";
+        ? character.name + " | WP Character Builder"
+        : "WP Character Builder";
 
     let year = new Date().getFullYear();
 

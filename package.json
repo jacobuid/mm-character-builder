@@ -1,7 +1,7 @@
 {
   "name": "wp-character-builder",
   "version": "0.1.0",
-  "description": "Dungeons &amp; Dragons Character Sheet App",
+  "description": "Wayward Path Character Builder App",
   "private": true,
   "repository": {
     "type": "git",
