@@ -1,9 +1,9 @@
 export default {
     name: "",
     gender: "",
-    class: "",
-    subclass: "",
-    race: "",
+    lineage: "",
+    archetypes: "",
+    heritage: "",
     subrace: "",
     alignment: "",
     background: "",
@@ -52,5 +52,5 @@ export default {
     charismaSaveProficient: "",
     charismaSaveAdvantage: "",
     charismaSaveDisadvantage: "",
-    inspiration: false
+    inspiration: false,
 };

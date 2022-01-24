@@ -83,12 +83,9 @@ class App extends Component {
             : "D&D Character Sheet";
 
         let character = this.state.character;
-        let characterRace = character.subrace
-            ? character.subrace
-            : character.race;
-        let characterClass = character.subclass
-            ? character.subclass
-            : character.class;
+        let characterHeritage = character.heritage;
+        let characterLineage = character.lineage;
+        let characterArchetypes = character.archetypes;
 
         let bonus = character.level ? calculate.bonus(character.level) : 0;
 
@@ -101,7 +98,16 @@ class App extends Component {
                         src="/images/wp-logo.png"
                         alt="D&amp;D Logo"
                     />
-                    <h1 id="wp-title">Character Builder</h1>
+                    <div id="wp-options">
+                        <h1 id="wp-title">Character Builder</h1>
+                        <button
+                            id="wp-export"
+                            className="wp-button"
+                            onClick={this.handleExport}
+                        >
+                            Export Character Data
+                        </button>
+                    </div>
                 </header>
                 <main id="wp-content">
                     <Box>
@@ -113,19 +119,27 @@ class App extends Component {
                         />
                         <Row>
                             <TextInput
-                                value={characterRace || ""}
-                                id="race"
+                                value={characterHeritage || ""}
+                                id="heritage"
                                 size="wp-small"
                                 onChange={this.handleChange}
-                                placeholder="Race"
+                                placeholder="Heritage"
                             />
                             <VerticalRule />
                             <TextInput
-                                value={characterClass || ""}
-                                id="class"
+                                value={characterLineage || ""}
+                                id="lineage"
                                 size="wp-small"
                                 onChange={this.handleChange}
-                                placeholder="Class"
+                                placeholder="Lineage"
+                            />
+                            <VerticalRule />
+                            <TextInput
+                                value={characterArchetypes || ""}
+                                id="archetypes"
+                                size="wp-small"
+                                onChange={this.handleChange}
+                                placeholder="archetypes"
                             />
                             <VerticalRule />
                             <TextInput
