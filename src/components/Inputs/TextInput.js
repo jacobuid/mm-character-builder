@@ -1,11 +1,15 @@
 import React, { Component } from "react";
-import ContentEditable from "react-contenteditable";
 class TextInput extends Component {
     render() {
-        let { label, size, onChange, placeholder, ...other } = this.props;
+        let { label, size, onChange, ...other } = this.props;
 
         const handleChange = (e) => {
             e.target.id = this.props.id;
+            onChange(e);
+        };
+
+        const handleFocus = (e) => {
+            e.target.select();
             onChange(e);
         };
 
@@ -15,10 +19,11 @@ class TextInput extends Component {
 
         return (
             <React.Fragment>
-                <ContentEditable
-                    html={this.props.value || placeholder}
+                <input
+                    value={this.props.value}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
+                    onFocus={handleFocus}
                     className={`wp-text-input${size ? " " + size : ""}`}
                     spellCheck="false"
                     {...other}
