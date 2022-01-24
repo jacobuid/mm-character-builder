@@ -4,12 +4,12 @@ class TextInput extends Component {
     render() {
         let { label, size, onChange, placeholder, ...other } = this.props;
 
-        const handleChange = e => {
+        const handleChange = (e) => {
             e.target.id = this.props.id;
             onChange(e);
         };
 
-        const handleKeyDown = e => {
+        const handleKeyDown = (e) => {
             e.keyCode === 13 && e.preventDefault();
         };
 
@@ -19,7 +19,7 @@ class TextInput extends Component {
                     html={this.props.value || placeholder}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
-                    className={`dnd-text-input${size ? " " + size : ""}`}
+                    className={`wp-text-input${size ? " " + size : ""}`}
                     spellCheck="false"
                     {...other}
                 />

@@ -3,7 +3,7 @@ import detectStorage from "../_utils/detect-storage";
 import exportCharacter from "../_utils/export-character";
 //import encodeImage from '../_utils/encode-image'
 import characterData from "../_utils/character-data";
-import calculate from "../_utils/dnd-calculations";
+import calculate from "../_utils/wp-calculations";
 import { Container, Box, Row, VerticalRule } from "./Layout/Layout";
 import TextInput from "./Inputs/TextInput";
 import Ability from "./Ability/Ability";
@@ -93,7 +93,7 @@ class App extends Component {
         let bonus = character.level ? calculate.bonus(character.level) : 0;
 
         return (
-            <div id="dnd-app">
+            <div id="wp-app">
                 {this.state.notSupported}
                 <header>
                     <img
@@ -103,7 +103,7 @@ class App extends Component {
                     />
                     <h1 id="wp-title">Character Builder</h1>
                 </header>
-                <main id="dnd-content">
+                <main id="wp-content">
                     <Box>
                         <TextInput
                             value={character.name || ""}
@@ -115,7 +115,7 @@ class App extends Component {
                             <TextInput
                                 value={characterRace || ""}
                                 id="race"
-                                size="dnd-small"
+                                size="wp-small"
                                 onChange={this.handleChange}
                                 placeholder="Race"
                             />
@@ -123,7 +123,7 @@ class App extends Component {
                             <TextInput
                                 value={characterClass || ""}
                                 id="class"
-                                size="dnd-small"
+                                size="wp-small"
                                 onChange={this.handleChange}
                                 placeholder="Class"
                             />
@@ -131,7 +131,7 @@ class App extends Component {
                             <TextInput
                                 value={character.level || ""}
                                 id="level"
-                                size="dnd-small"
+                                size="wp-small"
                                 onChange={this.handleChange}
                                 placeholder="Level"
                             />
@@ -139,7 +139,7 @@ class App extends Component {
                         </Row>
                     </Box>
 
-                    <section id="dnd-ability-scores">
+                    <section id="wp-ability-scores">
                         <Ability
                             ability={character.strength}
                             label="strength"

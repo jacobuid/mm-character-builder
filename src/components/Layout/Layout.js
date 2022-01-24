@@ -4,7 +4,7 @@ class Row extends Component {
     render() {
         let { ...props } = this.props;
         return (
-            <div className={`dnd-row`} {...props}>
+            <div className={`wp-row`} {...props}>
                 {this.props.children}
             </div>
         );
@@ -14,7 +14,7 @@ class Row extends Component {
 class Container extends Component {
     render() {
         return (
-            <section className={`dnd-container-${this.props.size}`}>
+            <section className={`wp-container-${this.props.size}`}>
                 {this.props.children}
             </section>
         );
@@ -23,7 +23,7 @@ class Container extends Component {
 
 class Spacer extends Component {
     render() {
-        return <div className="dnd-container-gutter"></div>;
+        return <div className="wp-container-gutter"></div>;
     }
 }
 
@@ -36,8 +36,8 @@ class VerticalRule extends Component {
 class Box extends Component {
     render() {
         return (
-            <article className="dnd-box">
-                <span className="dnd-box-tag">{this.props.tag}</span>
+            <article className="wp-box">
+                <span className="wp-box-tag">{this.props.tag}</span>
                 {this.props.children}
             </article>
         );

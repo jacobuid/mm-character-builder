@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 
 import NumberInput from "../Inputs/NumberInput";
-import calculate from "../../_utils/dnd-calculations";
+import calculate from "../../_utils/wp-calculations";
 
 class Ability extends Component {
     handleValueChange = e => {
@@ -46,7 +46,7 @@ class Ability extends Component {
 
         return (
             <div className="ability">
-                <div className="ability-banner dnd-box">
+                <div className="ability-banner wp-box">
                     <img
                         className="ability-icon"
                         src={`/images/${label}.png`}
@@ -97,7 +97,7 @@ class Ability extends Component {
                         />
                         )
                     </div>
-                    <div className="command-task dnd-box dnd-border">
+                    <div className="command-task wp-box wp-border">
                         {abilityRoll} {abilityModifier}
                     </div>
                 </div>
@@ -134,7 +134,7 @@ class Ability extends Component {
                         />
                         )
                     </div>
-                    <div className="command-task dnd-box dnd-border">
+                    <div className="command-task wp-box wp-border">
                         {saveRoll} {saveModifier}
                     </div>
                 </div>
