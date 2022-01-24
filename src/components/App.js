@@ -3,10 +3,8 @@ import detectStorage from "../_utils/detect-storage";
 import exportCharacter from "../_utils/export-character";
 //import encodeImage from '../_utils/encode-image'
 import characterData from "../_utils/character-data";
-import calculate from "../_utils/wp-calculations";
 import { Container, Box, Row, VerticalRule } from "./Layout/Layout";
 import TextInput from "./Inputs/TextInput";
-import Ability from "./Ability/Ability";
 
 class App extends Component {
     state = {
@@ -77,6 +75,10 @@ class App extends Component {
         this.setState({ character });
     };
 
+    addItem = (item) => {
+        // var timestamp = new Date().getTime();
+    };
+
     render() {
         document.title = this.state.character.name
             ? this.state.character.name + " | D&D Character Sheet"
@@ -87,7 +89,9 @@ class App extends Component {
         let characterLineage = character.lineage;
         let characterArchetypes = character.archetypes;
 
-        let bonus = character.level ? calculate.bonus(character.level) : 0;
+        let newSkill = "a";
+
+        let year = new Date().getFullYear();
 
         return (
             <div id="wp-app">
@@ -153,45 +157,14 @@ class App extends Component {
                         </Row>
                     </Box>
 
-                    <section id="wp-ability-scores">
-                        <Ability
-                            ability={character.strength}
-                            label="strength"
-                            bonus={bonus}
-                            expertise={character.strengthExpertise}
-                            proficient={character.strengthProficient}
-                            advantage={character.strengthAdvantage}
-                            disadvantage={character.strengthDisadvantage}
-                            saveExpertise={character.strengthSaveExpertise}
-                            saveProficient={character.strengthSaveProficient}
-                            saveAdvantage={character.strengthSaveAdvantage}
-                            saveDisadvantage={
-                                character.strengthSaveDisadvantage
-                            }
-                            onValueChange={this.handleChange}
-                            onCheckboxChange={this.handleCheckboxChange}
-                        />
-                        <Ability
-                            ability={character.dexterity}
-                            label="dexterity"
-                            bonus={bonus}
-                            expertise={character.dexterityExpertise}
-                            proficient={character.dexterityProficient}
-                            advantage={character.dexterityAdvantage}
-                            disadvantage={character.dexterityDisadvantage}
-                            saveExpertise={character.dexteritySaveExpertise}
-                            saveProficient={character.dexteritySaveProficient}
-                            saveAdvantage={character.dexteritySaveAdvantage}
-                            saveDisadvantage={
-                                character.dexteritySaveDisadvantage
-                            }
-                            onValueChange={this.handleChange}
-                            onCheckboxChange={this.handleCheckboxChange}
-                        />
+                    <section id="wp-skills">
+                        {/* {character.skills.map((data) => (
+                            <p>{data.name}</p>
+                        ))} */}
                     </section>
                 </main>
                 <footer>
-                    <p>&copy; 2019 Jacob King</p>
+                    <p>&copy; {year} Wayward Path</p>
                 </footer>
             </div>
         );
