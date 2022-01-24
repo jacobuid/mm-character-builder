@@ -21,7 +21,7 @@
     "react-beautiful-dnd": "^12.2.0",
     "react-contenteditable": "^3.3.6",
     "react-dom": "^16.14.0",
-    "react-scripts": "3.3.0",
+    "react-scripts": "3.2.0",
     "styled-components": "^4.4.1"
   },
   "scripts": {
@@ -44,5 +44,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "serve": "^13.0.2"
   }
 }
