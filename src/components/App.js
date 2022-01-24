@@ -10,20 +10,20 @@ import Ability from "./Ability/Ability";
 
 class App extends Component {
     state = {
-        theme: "dark",
+        theme: "light",
         notSupported: "",
-        character: {}
+        character: {},
     };
 
     componentDidMount() {
         // Load character from localStorage if he exists
         if (detectStorage("localStorage")) {
-            try {
+            if (localStorage.getItem("wp-character")) {
                 let storedCharacter = JSON.parse(
-                    localStorage.getItem("dnd-character")
+                    localStorage.getItem("wp-character")
                 );
                 this.setState({ character: storedCharacter });
-            } catch (e) {
+            } else {
                 // Character does not exist, Create New one.
                 this.setState({ character: characterData });
             }
@@ -31,7 +31,7 @@ class App extends Component {
             this.setState({
                 notSupported: (
                     <div>Sorry. App is not supported in this browser.</div>
-                )
+                ),
             });
         }
 
@@ -46,30 +46,30 @@ class App extends Component {
         window.removeEventListener("beforeunload", this.onUnload);
     }
 
-    onUnload = e => {
+    onUnload = (e) => {
         if (detectStorage("localStorage")) {
             localStorage.setItem(
-                "dnd-character",
+                "wp-character",
                 JSON.stringify(this.state.character)
             );
             // TODO: localStorage.setItem('settings', this.state.theme);
         }
     };
 
-    handleExport = e => {
+    handleExport = (e) => {
         exportCharacter(
             JSON.stringify(this.state.character),
             `character-sheet-${this.state.character.name}.json`
         );
     };
 
-    handleChange = e => {
+    handleChange = (e) => {
         let character = { ...this.state.character };
         character[e.target.id] = e.target.value;
         this.setState({ character });
     };
 
-    handleCheckboxChange = e => {
+    handleCheckboxChange = (e) => {
         let character = { ...this.state.character };
         const value = e.target.checked;
         const name = e.target.name;
@@ -97,11 +97,11 @@ class App extends Component {
                 {this.state.notSupported}
                 <header>
                     <img
-                        id="dnd-logo"
-                        src="/images/dnd-logo.png"
+                        id="wp-logo"
+                        src="/images/wp-logo.png"
                         alt="D&amp;D Logo"
                     />
-                    <h1 id="dnd-title">Character Sheet</h1>
+                    <h1 id="wp-title">Character Builder</h1>
                 </header>
                 <main id="dnd-content">
                     <Box>
@@ -142,14 +142,34 @@ class App extends Component {
                     <section id="dnd-ability-scores">
                         <Ability
                             ability={character.strength}
+                            label="strength"
                             bonus={bonus}
+                            expertise={character.strengthExpertise}
                             proficient={character.strengthProficient}
                             advantage={character.strengthAdvantage}
                             disadvantage={character.strengthDisadvantage}
+                            saveExpertise={character.strengthSaveExpertise}
                             saveProficient={character.strengthSaveProficient}
                             saveAdvantage={character.strengthSaveAdvantage}
                             saveDisadvantage={
                                 character.strengthSaveDisadvantage
+                            }
+                            onValueChange={this.handleChange}
+                            onCheckboxChange={this.handleCheckboxChange}
+                        />
+                        <Ability
+                            ability={character.dexterity}
+                            label="dexterity"
+                            bonus={bonus}
+                            expertise={character.dexterityExpertise}
+                            proficient={character.dexterityProficient}
+                            advantage={character.dexterityAdvantage}
+                            disadvantage={character.dexterityDisadvantage}
+                            saveExpertise={character.dexteritySaveExpertise}
+                            saveProficient={character.dexteritySaveProficient}
+                            saveAdvantage={character.dexteritySaveAdvantage}
+                            saveDisadvantage={
+                                character.dexteritySaveDisadvantage
                             }
                             onValueChange={this.handleChange}
                             onCheckboxChange={this.handleCheckboxChange}

@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
-import calculations from "../../_utils/dnd-calculations";
 
 import NumberInput from "../Inputs/NumberInput";
 import calculate from "../../_utils/dnd-calculations";
@@ -21,63 +20,77 @@ class Ability extends Component {
     render() {
         let {
             ability,
+            label,
             bonus,
             proficient,
+            expertise,
             advantage,
-            disadvantage
+            disadvantage,
+            saveProficient,
+            saveExpertise,
+            saveAdvantage,
+            saveDisadvantage
         } = this.props;
 
-        let dice = (<img className="dice" src="/images/dice/d20.png" alt="d20" />);
-        let advDice = (<img className="dice" src="/images/dice/d20-green.png" alt="d20" />);
-        let disadvDice = (<img className="dice" src="/images/dice/d20-red.png" alt="d20" />);
+        let d20 = <img className="dice" src="/images/dice/d20.png" alt="d20" key="0" />;
+        let d20Adv = <img className="dice" src="/images/dice/d20-green.png" alt="d20 Advantage" key="1" />;
+        let d20Dis = <img className="dice" src="/images/dice/d20-red.png" alt="d20 Disadvantage" key="2" />;
 
-        let roll = advantage && disadvantage ? dice :
-            advantage ? [advDice, " + ", dice] :
-                disadvantage ? [dice, " + ", disadvDice] :
-                    dice;
+        let modifier = calculate.modifier(ability);
 
-        let modifier = proficient ? " + " + (calculate.modifier(ability) + bonus) :
-            " + " + calculate.modifier(ability);
+        let abilityRoll = calculate.getRoll(advantage, disadvantage, { norm: d20, adv: d20Adv, dis: d20Dis });
+        let abilityModifier = calculate.getModifier(expertise, proficient, modifier, bonus);
+
+        let saveRoll = calculate.getRoll(saveAdvantage, saveDisadvantage, { norm: d20, adv: d20Adv, dis: d20Dis });
+        let saveModifier = calculate.getModifier(saveExpertise, saveProficient, modifier, bonus);
 
         return (
             <div className="ability">
                 <div className="ability-banner dnd-box">
                     <img
                         className="ability-icon"
-                        src="/images/strength.png"
+                        src={`/images/${label}.png`}
                         alt=""
                     />
-                    <p className="ability-tag">Strength</p>
+                    <p className="ability-tag">{label.charAt(0).toUpperCase() + label.slice(1)}</p>
                     <div className="ability-stat">
                         <NumberInput
                             value={ability || ""}
-                            id="strength"
+                            id={label}
                             onChange={this.handleValueChange}
                         />
                     </div>
                     <p className="ability-mod outline">
-                        {calculations.modifier(ability)}
+                        {modifier}
                     </p>
                 </div>
                 <div className="command">
                     <div className="command-tag">
-                        Ability Check (pro:
+                        <div>Ability Check</div>
+                        (exp:
                         <input
-                            name="strengthProficient"
+                            name={`${label}Expertise`}
                             type="checkbox"
-                            checked={proficient || false}
+                            checked={expertise || false}
                             onChange={this.handleCheckboxChange}
                         />
-                        , adv:
+                        &nbsp;pro:
                         <input
-                            name="strengthAdvantage"
+                            name={`${label}Proficient`}
+                            type="checkbox"
+                            checked={proficient || 0}
+                            onChange={this.handleCheckboxChange}
+                        />
+                        &nbsp;adv:
+                        <input
+                            name={`${label}Advantage`}
                             type="checkbox"
                             checked={advantage || false}
                             onChange={this.handleCheckboxChange}
                         />
-                        , dis:
+                        &nbsp;dis:
                         <input
-                            name="strengthDisadvantage"
+                            name={`${label}Disadvantage`}
                             type="checkbox"
                             checked={disadvantage || false}
                             onChange={this.handleCheckboxChange}
@@ -85,23 +98,44 @@ class Ability extends Component {
                         )
                     </div>
                     <div className="command-task dnd-box dnd-border">
-                        {roll} {modifier}
+                        {abilityRoll} {abilityModifier}
                     </div>
                 </div>
                 <div className="command">
                     <div className="command-tag">
-                        Saving Throw (pro:
-                        <input type="checkbox" />, adv:
-                        <input type="checkbox" />, dis:
-                        <input type="checkbox" />)
+                        <div>Saving Throw</div>
+                        (exp:
+                        <input
+                            name={`${label}SaveExpertise`}
+                            type="checkbox"
+                            checked={saveExpertise || false}
+                            onChange={this.handleCheckboxChange}
+                        />
+                        &nbsp;pro:
+                        <input
+                            name={`${label}SaveProficient`}
+                            type="checkbox"
+                            checked={saveProficient || false}
+                            onChange={this.handleCheckboxChange}
+                        />
+                        &nbsp;adv:
+                        <input
+                            name={`${label}SaveAdvantage`}
+                            type="checkbox"
+                            checked={saveAdvantage || false}
+                            onChange={this.handleCheckboxChange}
+                        />
+                        &nbsp;dis:
+                        <input
+                            name={`${label}SaveDisadvantage`}
+                            type="checkbox"
+                            checked={saveDisadvantage || false}
+                            onChange={this.handleCheckboxChange}
+                        />
+                        )
                     </div>
                     <div className="command-task dnd-box dnd-border">
-                        <img
-                            className="dice"
-                            src="/images/dice/d20.png"
-                            alt="d20"
-                        />{" "}
-                        + 6
+                        {saveRoll} {saveModifier}
                     </div>
                 </div>
             </div>
@@ -112,7 +146,8 @@ class Ability extends Component {
 Ability.propTypes = {
     ability: PropTypes.string,
     bonus: PropTypes.number,
-    proficient: PropTypes.bool,
+    expertise: PropTypes.bool,
+    proficient: PropTypes.string,
     advantage: PropTypes.bool,
     disadvantage: PropTypes.bool
 };

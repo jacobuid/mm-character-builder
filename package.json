@@ -1,18 +1,18 @@
 {
-  "name": "dnd-character-sheet",
+  "name": "wp-character-builder",
   "version": "0.1.0",
   "description": "Dungeons &amp; Dragons Character Sheet App",
   "private": true,
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jacobuid/dnd-character-sheet.git"
+    "url": "git+https://github.com/jacobuid/wp-character-builder.git"
   },
   "author": "https://github.com/jacobuid/",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/jacobuid/dnd-character-sheet/issues"
+    "url": "https://github.com/jacobuid/wp-character-builder/issues"
   },
-  "homepage": "https://github.com/jacobuid/dnd-character-sheet#readme",
+  "homepage": "https://github.com/jacobuid/wp-character-builder#readme",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.3.2",

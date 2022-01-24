@@ -150,7 +150,7 @@ body {
         2px 1px 0 #000, 2px 2px 0 #000;
 }
 
-.dnd-vertical-rule {
+.wp-vertical-rule {
     display: none;
 }
 
@@ -180,15 +180,16 @@ body {
     margin: 0 auto;
 }
 
-#dnd-logo {
+#wp-logo {
     margin: 15px 0;
     width: 100px;
     float: left;
 }
-#dnd-title {
+#wp-title {
     margin: 0px 130px;
     padding: 30px 0;
     font-size: 20px;
+    text-align: right;
 }
 #dnd-ability-scores {
     width: 120px;
@@ -266,21 +267,6 @@ body {
     vertical-align: middle;
 }
 
-/* Theme Styles */
-.dark {
-    background-color: rgb(50, 50, 60);
-    color: #bbb;
-}
-.dark .dnd-text-input {
-    color: #dddddf;
-}
-.dark .dnd-box {
-    background-color: rgba(0, 0, 10, 0.5);
-}
-.dark .dnd-border {
-    border-color: rgba(0, 0, 10, 1);
-}
-
 .light {
     background-color: rgb(220, 220, 230);
     color: #333;
@@ -315,17 +301,17 @@ body {
     .dnd-container-gutter {
         width: 20px;
     }
-    .dnd-vertical-rule {
+    .wp-vertical-rule {
         display: block;
         width: 1px;
-        background-color: #d00;
+        background-color: #00a14b;
     }
 
     #dnd-content {
         clear: both;
     }
-    #dnd-logo {
-        width: 100px;
+    #wp-logo {
+        width: 400px;
     }
 
     #class,

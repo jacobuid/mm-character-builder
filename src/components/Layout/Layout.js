@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 class Row extends Component {
     render() {
@@ -8,7 +8,6 @@ class Row extends Component {
                 {this.props.children}
             </div>
         );
-        
     }
 }
 
@@ -19,26 +18,20 @@ class Container extends Component {
                 {this.props.children}
             </section>
         );
-        
     }
 }
 
 class Spacer extends Component {
     render() {
-        return (
-            <div className="dnd-container-gutter"></div>
-        );
+        return <div className="dnd-container-gutter"></div>;
     }
 }
 
 class VerticalRule extends Component {
     render() {
-        return (
-            <div className="dnd-vertical-rule"></div>
-        );
+        return <div className="wp-vertical-rule"></div>;
     }
 }
-
 
 class Box extends Component {
     render() {

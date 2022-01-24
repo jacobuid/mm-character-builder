@@ -49,9 +49,29 @@ const modifier = value => {
     if (value == 30) return 10;
 };
 
+const getRoll = (adv, dis, dice) => {
+    return adv && dis
+        ? dice.norm
+        : adv
+        ? [dice.adv, " + ", dice.norm]
+        : dis
+        ? [dice.norm, " + ", dice.dis]
+        : dice.norm;
+};
+
+const getModifier = (exp, pro, mod, bonus) => {
+    return exp && pro
+        ? " + " + (mod + bonus * 2)
+        : pro
+        ? " + " + (mod + bonus)
+        : " + " + mod;
+};
+
 const calculate = {};
 calculate.level = level;
 calculate.bonus = bonus;
 calculate.modifier = modifier;
+calculate.getRoll = getRoll;
+calculate.getModifier = getModifier;
 
 export default calculate;
