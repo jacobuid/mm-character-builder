@@ -13,11 +13,19 @@ class Row extends Component {
 
 class Container extends Component {
     render() {
-        return (
-            <section className={`wp-container-${this.props.size}`}>
-                {this.props.children}
-            </section>
-        );
+        if(this.props.size){
+            return (
+                <section className={`wp-container-${this.props.size}`}>
+                    {this.props.children}
+                </section>
+            )
+        } else {
+            return (
+                <section className={`wp-container`}>
+                    {this.props.children}
+                </section>
+            )
+        }
     }
 }
 

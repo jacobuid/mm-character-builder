@@ -1,4 +1,5 @@
 import React from 'react';
+import { Container, Row } from "../Layout/Layout";
 
 const SkillList = (props) => {
 
@@ -22,29 +23,34 @@ const SkillList = (props) => {
     };
 
     return (
-        <div>
-            <ul>
-                {props.skills.map((item, i) => (
-                    <li key={i}>
-                        {editing ?
-                            <input type="text" value={item.name} /> :
-                            <label>{item.name}</label>
-                        }
+        <>
+            <Row>
+                <Container>
+                    {props.skills.map((item, i) => (
+                        <div key={i}>
+                            {editing ?
+                                <input type="text" value={item.name} /> :
+                                <label>{item.name}</label>
+                            }
 
 
-                        <button type="button" onClick={() => setEditing(!editing)}>edit</button>
-                        <button type="button" onClick={() => handleRemove(item.id)}>
-                            delete
-                        </button>
-                    </li>
-                ))}
-            </ul>
-
-            <form onSubmit={handleSubmit}>
-                <input type="text" value={skill} onChange={handleChange} />
-                <button type="submit">Add Item</button>
-            </form>
-        </div>
+                            <button type="button" onClick={() => setEditing(!editing)}>edit</button>
+                            <button type="button" onClick={() => handleRemove(item.id)}>
+                                delete
+                            </button>
+                        </div>
+                    ))}
+                </Container>
+            </Row>
+            <Row>
+                <Container>
+                    <form onSubmit={handleSubmit}>
+                        <input type="text" value={skill} onChange={handleChange} />
+                        <button type="submit">Add Item</button>
+                    </form>
+                </Container>
+            </Row>
+        </>
     );
 };
 
