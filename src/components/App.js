@@ -53,12 +53,12 @@ function App(props) {
         setCharacter(currentCharacter);
     };
 
-    const addItem = (value, type) => {
+    const addItem = (value, proficiency, type) => {
         let currentCharacter = { ...character };
         currentCharacter[type].push({
             id: "id" + new Date().getTime(),
             name: value,
-            proficency: "todo",
+            proficiency: proficiency,
         });
         setCharacter(currentCharacter);
     };
@@ -68,6 +68,20 @@ function App(props) {
         currentCharacter[type] = currentCharacter[type].filter(
             (value) => value.id !== id
         );
+        setCharacter(currentCharacter);
+    };
+
+    const editItem = (e, id, type, attr) => {
+        let currentCharacter = { ...character };
+        currentCharacter[type] = currentCharacter[type].map(item => {
+            if (item.id === id) {
+                return (attr === 'name') ? 
+                     { ...item, name: e.target.value } :
+                     { ...item, proficiency: e.target.value };
+            } else {
+                return item;
+            }
+          })
         setCharacter(currentCharacter);
     };
 
@@ -204,6 +218,7 @@ function App(props) {
                                             skills={character.skills}
                                             addCallback={addItem}
                                             removeCallback={removeItem}
+                                            editCallback={editItem}
                                         />
                                     </Container>
                                 </Row>

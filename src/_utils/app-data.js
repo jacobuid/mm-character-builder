@@ -7,8 +7,8 @@ const characterData = {
     heritage: "",
     speed: "",
     skills: [
-        { id: 1234, name: "punch", proficency: "4", specific: true },
-        { id: 1244, name: "kick", proficency: "2", specific: false },
+        { id: 1234, name: "punch", proficiency: "4", specific: true },
+        { id: 1244, name: "kick", proficiency: "2", specific: false },
     ],
     traits: [
         { id: 6234, name: "strength", active: true },
@@ -23,14 +23,4 @@ const characterData = {
     inspiration: "",
 };
 
-const skillData = [
-    { name: "punch", proficency: "4" },
-    { name: "kick", proficency: "2" },
-];
-
-const traitData = [
-    { name: "strength", active: true },
-    { name: "constitution", active: false },
-];
-
-export { characterData, skillData, traitData };
+export { characterData };

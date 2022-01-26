@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 class TextInput extends Component {
     render() {
-        let { label, size, onChange, onBlur, ...other } = this.props;
+        let { label, size, onChange, onBlur, allowEnter, ...other } = this.props;
 
         const handleChange = (e) => {
             e.target.id = this.props.id;
@@ -10,11 +10,12 @@ class TextInput extends Component {
 
         const handleFocus = (e) => {
             e.target.select();
-            onChange(e);
         };
 
         const handleKeyDown = (e) => {
-            e.keyCode === 13 && e.preventDefault();
+            if(!allowEnter){
+                e.keyCode === 13 && e.preventDefault();
+            }
         };
 
         return (
