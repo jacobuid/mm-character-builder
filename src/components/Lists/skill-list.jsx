@@ -2,12 +2,14 @@ import React from 'react';
 import { Container, Row } from "../Layout/Layout";
 import TextInput from "../Inputs/TextInput";
 import NumberInput from "../Inputs/NumberInput";
+import ToggleSwitch from "../Inputs/ToggleSwitch";
 
 
 const SkillList = (props) => {
 
     const [skill, setSkill] = React.useState('');
     const [proficiency, setProficiency] = React.useState('');
+    const [specific, setSpecific] = React.useState(false);
 
     const skillChange = e => {
         setSkill(e.target.value);
@@ -15,61 +17,108 @@ const SkillList = (props) => {
     const proficiencyChange = e => {
         setProficiency(e.target.value);
     };
+    const specificChange = e => {
+        setSpecific(e.target.checked);
+    };
 
 
-    const handleSubmit = event => {
-        if (props.addCallback && skill) {
-            props.addCallback(skill, proficiency, 'skills');
-        }
+
+    const addItem = (e) => {
+        e.preventDefault();
+        let currentCharacter = { ...props.character };
+        currentCharacter.skills.push({
+            id: "id" + new Date().getTime(),
+            name: skill,
+            proficiency: proficiency,
+            specific: specific
+        });
+        props.setCharacter(currentCharacter);
         setSkill('');
-        setProficiency('')
-        event.preventDefault();
+        setProficiency('');
+        setSpecific(false);
     };
 
     const handleRemove = id => {
-        props.removeCallback(id, 'skills');
+        removeItem(id);
+    };
+
+    const removeItem = (id) => {
+        let currentCharacter = { ...props.character };
+        currentCharacter.skills = currentCharacter.skills.filter(
+            (value) => value.id !== id
+        );
+        props.setCharacter(currentCharacter);
     };
 
     const nameEdit = (e, id) => {
-        props.editCallback(e, id, 'skills', 'name');
+        editItem(e, id, 'name');
     };
     const proficiencyEdit = (e, id) => {
-        props.editCallback(e, id, 'skills', 'proficiency');
+        editItem(e, id, 'proficiency');
+    };
+    const specificEdit = (e, id) => {
+        editItem(e, id, 'specific');
+    };
+
+    const editItem = (e, id, attr) => {
+        let currentCharacter = { ...props.character };
+        currentCharacter.skills = currentCharacter.skills.map(item => {
+            let currentItem;
+            if (item.id === id) {
+                if (attr === 'name') {
+                    currentItem = { ...item, name: e.target.value }
+                }
+                if (attr === 'proficiency') {
+                    currentItem = { ...item, proficiency: e.target.value }
+                }
+                if (attr === 'specific') {
+                    currentItem = { ...item, specific: e.target.checked }
+                }
+            } else {
+                currentItem = item;
+            }
+            return currentItem;
+        })
+        props.setCharacter(currentCharacter);
     };
 
     return (
         <>
             <Row>
                 <Container>
-                    {props.skills.map((item, i) => (
+                    {props.character.skills.map((item, i) => (
                         <div className="wp-skill" key={item.id}>
                             <Row>
-                                <Container>
-                                    <label className="f-grey h4">Name:</label>
+                                <Container className="skill-name-padding" size="2">
                                     <TextInput
                                         value={item.name}
                                         onChange={(e) => nameEdit(e, item.id)}
                                     />
                                 </Container>
-                                <Container>
+                            </Row>
+                            <Row className="skill-info">
+                                <Container className="skill-proficiency">
                                     <label className="f-grey h4">Proficiency:</label>
                                     <NumberInput
                                         value={item.proficiency}
                                         onChange={(e) => proficiencyEdit(e, item.id)}
                                     />
                                 </Container>
+                                <Container className="skill-specific">
+                                    <label className="f-grey h4">Specific:</label>
+                                    <ToggleSwitch  
+                                        checked={item.specific} 
+                                        onChange={(e) => specificEdit(e, item.id)}
+                                    />
+                                </Container>
                             </Row>
-
-
-                            <button className="wp-delete" type="button" onClick={() => handleRemove(item.id)}>
-                                X
-                            </button>
+                            <button className="wp-delete" type="button" onClick={() => handleRemove(item.id)}>X</button>
                         </div>
                     ))}
                 </Container>
             </Row>
-            <form onSubmit={handleSubmit}>
-                <Row>
+            <form onSubmit={addItem}>
+                <Row className="wp-add">
                     <Container>
                         <TextInput
                             value={skill}
@@ -83,8 +132,14 @@ const SkillList = (props) => {
                             onChange={proficiencyChange}
                             allowEnter={true}
                         />
-                        <button type="submit">Add Item</button>
                     </Container>
+                    <Container>
+                        <label className="f-grey h4">Specific:</label>
+                        <ToggleSwitch checked={specific} onChange={specificChange} />
+                    </Container>
+                </Row>
+                <Row>
+                    <button type="submit">Add Item</button>
                 </Row>
             </form>
 

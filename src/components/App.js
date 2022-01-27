@@ -53,38 +53,6 @@ function App(props) {
         setCharacter(currentCharacter);
     };
 
-    const addItem = (value, proficiency, type) => {
-        let currentCharacter = { ...character };
-        currentCharacter[type].push({
-            id: "id" + new Date().getTime(),
-            name: value,
-            proficiency: proficiency,
-        });
-        setCharacter(currentCharacter);
-    };
-
-    const removeItem = (id, type) => {
-        let currentCharacter = { ...character };
-        currentCharacter[type] = currentCharacter[type].filter(
-            (value) => value.id !== id
-        );
-        setCharacter(currentCharacter);
-    };
-
-    const editItem = (e, id, type, attr) => {
-        let currentCharacter = { ...character };
-        currentCharacter[type] = currentCharacter[type].map(item => {
-            if (item.id === id) {
-                return (attr === 'name') ? 
-                     { ...item, name: e.target.value } :
-                     { ...item, proficiency: e.target.value };
-            } else {
-                return item;
-            }
-          })
-        setCharacter(currentCharacter);
-    };
-
     document.title = character.name
         ? character.name + " | WP Character Builder"
         : "WP Character Builder";
@@ -215,10 +183,8 @@ function App(props) {
                                 <Row>
                                     <Container>
                                         <SkillList
-                                            skills={character.skills}
-                                            addCallback={addItem}
-                                            removeCallback={removeItem}
-                                            editCallback={editItem}
+                                            character={character}
+                                            setCharacter={setCharacter}
                                         />
                                     </Container>
                                 </Row>

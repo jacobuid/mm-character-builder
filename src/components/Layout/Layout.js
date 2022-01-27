@@ -2,9 +2,9 @@ import React, { Component } from "react";
 
 class Row extends Component {
     render() {
-        let { ...props } = this.props;
+        let { className, ...props } = this.props;
         return (
-            <div className={`wp-row`} {...props}>
+            <div className={(className) ? 'wp-row ' + className : 'wp-row'} {...props}>
                 {this.props.children}
             </div>
         );
@@ -13,15 +13,16 @@ class Row extends Component {
 
 class Container extends Component {
     render() {
-        if(this.props.size){
+        let { className, size, ...props } = this.props;
+        if(this.size){
             return (
-                <section className={`wp-container-${this.props.size}`}>
+                <section className={(className) ? `wp-container-${size} ` + className : `wp-container-${size}`} {...props}>
                     {this.props.children}
                 </section>
             )
         } else {
             return (
-                <section className={`wp-container`}>
+                <section className={(className) ? 'wp-container ' + className : 'wp-container'} {...props}>
                     {this.props.children}
                 </section>
             )
