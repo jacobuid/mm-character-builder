@@ -113,17 +113,6 @@ function App(props) {
                                 <Row>
                                     <Container>
                                         <label className="f-grey h5">
-                                            Heritage:
-                                        </label>
-                                        <TextInput
-                                            value={character.heritage}
-                                            id="heritage"
-                                            onChange={handleChange}
-                                            placeholder="Heritage"
-                                        />
-                                    </Container>
-                                    <Container>
-                                        <label className="f-grey h5">
                                             Lineage:
                                         </label>
                                         <TextInput
@@ -131,6 +120,17 @@ function App(props) {
                                             id="lineage"
                                             onChange={handleChange}
                                             placeholder="Lineage"
+                                        />
+                                    </Container>
+                                    <Container>
+                                        <label className="f-grey h5">
+                                            Heritage:
+                                        </label>
+                                        <TextInput
+                                            value={character.heritage}
+                                            id="heritage"
+                                            onChange={handleChange}
+                                            placeholder="Heritage"
                                         />
                                     </Container>
                                     <Container>
