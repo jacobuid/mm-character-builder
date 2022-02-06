@@ -7,6 +7,7 @@ import ToggleSwitch from "../Inputs/ToggleSwitch";
 
 const SkillList = (props) => {
 
+
     const [skill, setSkill] = React.useState('');
     const [proficiency, setProficiency] = React.useState('');
     const [specific, setSpecific] = React.useState(false);
@@ -21,16 +22,16 @@ const SkillList = (props) => {
         setSpecific(e.target.checked);
     };
 
-
-
     const addItem = (e) => {
         e.preventDefault();
         let currentCharacter = { ...props.character };
+        let max = (specific) ? 12 : 10;
         currentCharacter.skills.push({
             id: "id" + new Date().getTime(),
             name: skill,
             proficiency: proficiency,
-            specific: specific
+            specific: specific,
+            max:max
         });
         props.setCharacter(currentCharacter);
         setSkill('');
@@ -72,6 +73,13 @@ const SkillList = (props) => {
                     currentItem = { ...item, proficiency: e.target.value }
                 }
                 if (attr === 'specific') {
+                    if(e.target.checked){
+                        item.max = 12;
+                        item.proficiency = parseInt(item.proficiency) + 2;
+                    } else {
+                        item.max = 10
+                        item.proficiency = parseInt(item.proficiency) - 2;
+                    }
                     currentItem = { ...item, specific: e.target.checked }
                 }
             } else {
@@ -87,10 +95,11 @@ const SkillList = (props) => {
             <Row>
                 <Container>
                     {props.character.skills.map((item, i) => (
-                        <div className="wp-skill" key={item.id}>
+                        <div id={'skill-' + item.id} className="wp-skill" key={item.id}>
                             <Row>
                                 <Container className="skill-name-padding" size="2">
                                     <TextInput
+                                        id={'name-' + item.id}
                                         value={item.name}
                                         onChange={(e) => nameEdit(e, item.id)}
                                     />
@@ -100,6 +109,8 @@ const SkillList = (props) => {
                                 <Container className="skill-proficiency">
                                     <label className="f-grey h4">Proficiency:</label>
                                     <NumberInput
+                                        id={'proficiency-' + item.id}
+                                        max={item.max}
                                         value={item.proficiency}
                                         onChange={(e) => proficiencyEdit(e, item.id)}
                                     />

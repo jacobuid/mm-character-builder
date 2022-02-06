@@ -6,6 +6,7 @@ import { Container, Box, Row, Spacer } from "./Layout/Layout";
 import TextInput from "./Inputs/TextInput";
 import NumberInput from "./Inputs/NumberInput";
 import SkillList from "./Lists/skill-list";
+import TraitList from "./Lists/trait-list";
 
 function App(props) {
     const [notSupported, setNotSupported] = useState("");
@@ -85,6 +86,7 @@ function App(props) {
                 <div className="wp-content">
                     <Box>
                         <Row>
+                            {/* Left Column */}
                             <Container size="2">
                                 <Row>
                                     <Container size="2">
@@ -155,10 +157,25 @@ function App(props) {
                                         />
                                     </Container>
                                 </Row>
+                                <Row>
+                                    <Container>
+                                        <h4 className="h4 wp-ribbon wp-ribbon-right">Traits</h4>
+                                    </Container>
+                                </Row>
+                                <Row>
+                                    <Container>
+                                        <TraitList
+                                            character={character}
+                                            setCharacter={setCharacter}
+                                        />
+                                    </Container>
+                                </Row>
                             </Container>
+                            {/* END Left Column */}
                             <Spacer />
                             <Spacer />
                             <Spacer />
+                            {/* Right Column */}
                             <Container>
                                 <Row>
                                     <Container>
@@ -189,6 +206,7 @@ function App(props) {
                                     </Container>
                                 </Row>
                             </Container>
+                            {/* END Right Column */}
                         </Row>
                     </Box>
                 </div>

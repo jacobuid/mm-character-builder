@@ -219,7 +219,8 @@ h6,.h6 { font-size: x-small; }
     background: #444;
 }
 
-.wp-skill {
+.wp-skill,
+.wp-trait {
     position: relative;
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -227,20 +228,31 @@ h6,.h6 { font-size: x-small; }
     overflow: hidden;
 }
 
-.wp-skill .skill-info{
+.wp-skill .skill-info,
+.wp-trait .trait-info{
     margin: 0 10px 10px;
     background-color: #fff;
     border-radius: 5px;
 }
 
-.wp-skill .skill-name-padding{
+.wp-skill .wp-container,
+.wp-trait .wp-container {
+    margin-bottom: 0;
+}
+
+.wp-skill .skill-name-padding,
+.wp-trait .trait-name-padding{
     padding:10px 42px 0 10px
 }
 .wp-skill .skill-specific,
-.wp-skill .skill-proficiency{
+.wp-skill .skill-proficiency,
+.wp-trait .trait-specific,
+.wp-trait .trait-effect{
     
 }
-.wp-skill .wp-text-input{
+
+.wp-skill .wp-text-input,
+.wp-trait .wp-text-input{
     line-height: 24px;
     height:24px;
     font-size: 22px;
@@ -248,12 +260,19 @@ h6,.h6 { font-size: x-small; }
     box-shadow: none;
 }
 
-.wp-skill .skill-proficiency .wp-text-input{
+.wp-skill .skill-proficiency .wp-text-input,
+.wp-trait .trait-effect .wp-text-input{
     color:#000
 }
 
-.wp-skill .wp-text-input:focus{
+.wp-skill .wp-text-input:focus,
+.wp-trait .wp-text-input:focus{
     box-shadow: 0px 3px 0px #fff;
+}
+
+.wp-skill .switch,
+.wp-trait .switch{
+    margin-left: 10px;
 }
 
 .wp-delete {
@@ -262,7 +281,7 @@ h6,.h6 { font-size: x-small; }
     right:10px;
     border:2px solid #fff;
     background: none;
-    color:#fff;
+    color:#000;
     font-weight: bolder;
 
 }
@@ -387,6 +406,7 @@ h6,.h6 { font-size: x-small; }
     display: inline-block;
     width: 48px;
     height: 22px;
+    line-height: 22px;
   }
   
   .switch input { 
