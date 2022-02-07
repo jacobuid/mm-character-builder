@@ -220,7 +220,8 @@ h6,.h6 { font-size: x-small; }
 }
 
 .wp-skill,
-.wp-trait {
+.wp-trait,
+.wp-add {
     position: relative;
     border: 2px solid #ccc;
     border-radius: 10px;
@@ -255,9 +256,10 @@ h6,.h6 { font-size: x-small; }
 .wp-trait .wp-text-input{
     line-height: 24px;
     height:24px;
-    font-size: 22px;
+    font-size: 20px;
     color:#00a14b;
     box-shadow: none;
+    width:auto;
 }
 
 .wp-skill .skill-proficiency .wp-text-input,
@@ -267,12 +269,29 @@ h6,.h6 { font-size: x-small; }
 
 .wp-skill .wp-text-input:focus,
 .wp-trait .wp-text-input:focus{
-    box-shadow: 0px 3px 0px #fff;
+    box-shadow: 0px 3px 0px #ccc;
 }
 
 .wp-skill .switch,
-.wp-trait .switch{
+.wp-trait .switch,
+.wp-add .switch{
     margin-left: 10px;
+}
+
+.wp-submit{
+    margin-top:10px;
+}
+
+.wp-submit .wp-container{
+    margin-bottom: 0;
+}
+
+.wp-submit button[type='submit']{
+    float: right;
+}
+
+.wp-add{
+    padding: 10px 10px;
 }
 
 .wp-delete {

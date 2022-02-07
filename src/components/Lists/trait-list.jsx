@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row } from "../Layout/Layout";
+import { Container, Row, Spacer } from "../Layout/Layout";
 import TextInput from "../Inputs/TextInput";
 import ToggleSwitch from "../Inputs/ToggleSwitch";
 
@@ -13,14 +13,14 @@ const TraitList = (props) => {
     const traitChange = e => {
         setTrait(e.target.value);
     };
+    
     const effectChange = e => {
         setEffect(e.target.value);
     };
+    
     const activeChange = e => {
         setActive(e.target.checked);
     };
-
-
 
     const addItem = (e) => {
         e.preventDefault();
@@ -98,7 +98,7 @@ const TraitList = (props) => {
                             </Row>
                             <Row className="trait-info">
                                 <Container className="trait-effect">
-                                    <label className="f-grey h4">Effect:</label>
+                                    <label className="f-grey h5">Effect:</label>
                                     <TextInput
                                         id={'effect-' + item.id}
                                         value={item.effect}
@@ -106,7 +106,7 @@ const TraitList = (props) => {
                                     />
                                 </Container>
                                 <Container className="trait-active">
-                                    <label className="f-grey h4">Active:</label>
+                                    <label className="f-grey h5">Active:</label>
                                     <ToggleSwitch  
                                         checked={item.active} 
                                         onChange={(e) => activeEdit(e, item.id)}
@@ -118,29 +118,35 @@ const TraitList = (props) => {
                     ))}
                 </Container>
             </Row>
-            <form onSubmit={addItem}>
-                <Row className="wp-add">
+            <form className="wp-add" onSubmit={addItem}>
+                <Row>
+                    <Container><h3>Add a new trait</h3></Container>
+                </Row>
+                <Row>
                     <Container>
+                        <label className="f-grey h5">Trait Name:</label>
                         <TextInput
                             value={trait}
                             onChange={traitChange}
                             allowEnter={true}
                         />
                     </Container>
+                    <Spacer />
                     <Container>
+                        <label className="f-grey h5">Trait Effect:</label>
                         <TextInput
                             value={effect}
                             onChange={effectChange}
                             allowEnter={true}
                         />
                     </Container>
+                </Row>
+                <Row className="wp-submit">
                     <Container>
-                        <label className="f-grey h4">Active:</label>
+                        <label className="f-grey h5">Active:</label>
                         <ToggleSwitch checked={active} onChange={activeChange} />
                     </Container>
-                </Row>
-                <Row>
-                    <button type="submit">Add Item</button>
+                    <Container><button type="submit">Add Item</button></Container>
                 </Row>
             </form>
 

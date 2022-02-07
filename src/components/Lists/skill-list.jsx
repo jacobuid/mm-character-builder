@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Row } from "../Layout/Layout";
+import { Container, Row, Spacer } from "../Layout/Layout";
 import TextInput from "../Inputs/TextInput";
 import NumberInput from "../Inputs/NumberInput";
 import ToggleSwitch from "../Inputs/ToggleSwitch";
@@ -107,7 +107,7 @@ const SkillList = (props) => {
                             </Row>
                             <Row className="skill-info">
                                 <Container className="skill-proficiency">
-                                    <label className="f-grey h4">Proficiency:</label>
+                                    <label className="f-grey h5">Proficiency:</label>
                                     <NumberInput
                                         id={'proficiency-' + item.id}
                                         max={item.max}
@@ -116,7 +116,7 @@ const SkillList = (props) => {
                                     />
                                 </Container>
                                 <Container className="skill-specific">
-                                    <label className="f-grey h4">Specific:</label>
+                                    <label className="f-grey h5">Specific:</label>
                                     <ToggleSwitch  
                                         checked={item.specific} 
                                         onChange={(e) => specificEdit(e, item.id)}
@@ -128,29 +128,35 @@ const SkillList = (props) => {
                     ))}
                 </Container>
             </Row>
-            <form onSubmit={addItem}>
-                <Row className="wp-add">
+            <form className="wp-add" onSubmit={addItem}>
+                <Row>
+                    <Container><h3>Add a new skill</h3></Container>
+                </Row>
+                <Row>
                     <Container>
+                        <label className="f-grey h5">Skill Name:</label>
                         <TextInput
                             value={skill}
                             onChange={skillChange}
                             allowEnter={true}
                         />
                     </Container>
+                    <Spacer />
                     <Container>
+                        <label className="f-grey h5">Skill Proficiency:</label>
                         <TextInput
                             value={proficiency}
                             onChange={proficiencyChange}
                             allowEnter={true}
                         />
                     </Container>
+                </Row>
+                <Row className="wp-submit">
                     <Container>
-                        <label className="f-grey h4">Specific:</label>
+                        <label className="f-grey h5">Specific:</label>
                         <ToggleSwitch checked={specific} onChange={specificChange} />
                     </Container>
-                </Row>
-                <Row>
-                    <button type="submit">Add Item</button>
+                    <Container><button type="submit">Add Item</button></Container>
                 </Row>
             </form>
 

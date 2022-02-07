@@ -159,7 +159,7 @@ function App(props) {
                                 </Row>
                                 <Row>
                                     <Container>
-                                        <h4 className="h4 wp-ribbon wp-ribbon-right">Traits</h4>
+                                        <h4 className="h4 wp-ribbon wp-ribbon-left">Traits</h4>
                                     </Container>
                                 </Row>
                                 <Row>
@@ -213,6 +213,7 @@ function App(props) {
             </main>
             <footer>
                 <p>&copy; {year} Wayward Path</p>
+                <p>Creative Commons (Attribution)</p>
             </footer>
         </div>
     );
