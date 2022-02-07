@@ -7,6 +7,7 @@ import TextInput from "./Inputs/TextInput";
 import NumberInput from "./Inputs/NumberInput";
 import SkillList from "./Lists/skill-list";
 import TraitList from "./Lists/trait-list";
+import Display from "./Display/Display"
 
 function App(props) {
     const [notSupported, setNotSupported] = useState("");
@@ -179,13 +180,10 @@ function App(props) {
                             <Container>
                                 <Row>
                                     <Container>
-                                        <div className="clip-portrait">
-                                            <img
-                                                className="wp-charicter-portrait"
-                                                src="./images/character/bard.png"
-                                                alt="Character Portrait"
-                                            />
-                                        </div>
+                                        <Display 
+                                            character={character}
+                                            setCharacter={setCharacter}
+                                        />
                                     </Container>
                                 </Row>
                                 <Row>

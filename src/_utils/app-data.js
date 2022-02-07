@@ -18,9 +18,9 @@ const characterData = {
     stamina: "",
     ethos: "",
     reputation: "",
-    experience: "",
-    level: "",
-    inspiration: "",
+    experience: 0,
+    level: 1,
+    inspiration: false,
 };
 
 export { characterData };

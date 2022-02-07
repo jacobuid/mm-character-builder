@@ -171,9 +171,21 @@ h6,.h6 { font-size: x-small; }
 
 }
 
-.clip-portrait{
+.wp-display{
     height:300px;
-    overflow: hidden;;
+    overflow: hidden;
+    position: relative;
+}
+
+.wp-stats{
+    position:absolute;
+    top:0;
+    right:0;
+    text-align: right;
+}
+
+.wp-stats input[type="number"]{
+    width:40px;
 }
 
 .wp-vertical-rule {
