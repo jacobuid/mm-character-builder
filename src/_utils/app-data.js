@@ -6,9 +6,9 @@ const characterData = {
     archetypes: "",
     heritage: "",
     speed: "",
-    skills: [
-        { id: 1234, name: "Dexterity", proficiency: 4, specific: true, max:'12' },
-        { id: 1244, name: "Constitution", proficiency: 2, specific: false, max:'10' },
+    actions: [
+        { id: 1234, name: "Punch", proficiency: 4, specific: true, max:'12' },
+        { id: 1244, name: "Kick", proficiency: 2, specific: false, max:'10' },
     ],
     traits: [
         { id: 6234, name: "Punch", damage:'1d8', active: true },
