@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/mm-character-builder/static/css/main.c08742c4.chunk.css",
-    "main.js": "/mm-character-builder/static/js/main.0996dba8.chunk.js",
-    "main.js.map": "/mm-character-builder/static/js/main.0996dba8.chunk.js.map",
+    "main.js": "/mm-character-builder/static/js/main.aad69119.chunk.js",
+    "main.js.map": "/mm-character-builder/static/js/main.aad69119.chunk.js.map",
     "runtime-main.js": "/mm-character-builder/static/js/runtime-main.c2e7632e.js",
     "runtime-main.js.map": "/mm-character-builder/static/js/runtime-main.c2e7632e.js.map",
     "static/js/2.9bf38e5c.chunk.js": "/mm-character-builder/static/js/2.9bf38e5c.chunk.js",
     "static/js/2.9bf38e5c.chunk.js.map": "/mm-character-builder/static/js/2.9bf38e5c.chunk.js.map",
     "index.html": "/mm-character-builder/index.html",
-    "precache-manifest.41e154fed13c428357084d0a8eb8f337.js": "/mm-character-builder/precache-manifest.41e154fed13c428357084d0a8eb8f337.js",
+    "precache-manifest.893a7d2d4c91273b84b7ea5581e0ff6a.js": "/mm-character-builder/precache-manifest.893a7d2d4c91273b84b7ea5581e0ff6a.js",
     "service-worker.js": "/mm-character-builder/service-worker.js",
     "static/css/main.c08742c4.chunk.css.map": "/mm-character-builder/static/css/main.c08742c4.chunk.css.map"
   },
@@ -16,6 +16,6 @@
     "static/js/runtime-main.c2e7632e.js",
     "static/js/2.9bf38e5c.chunk.js",
     "static/css/main.c08742c4.chunk.css",
-    "static/js/main.0996dba8.chunk.js"
+    "static/js/main.aad69119.chunk.js"
   ]
 }
